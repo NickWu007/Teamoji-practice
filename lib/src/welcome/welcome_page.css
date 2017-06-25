@@ -1,0 +1,45 @@
+:host {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    color: white;
+}
+
+.tm-welcome {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    margin-top: auto;
+    align-self: center;
+}
+
+.tm-app-icon {
+    margin-top: -50px;
+    font-size: 125px;
+}
+
+.tm-main-header {
+    font-size: 40px;
+}
+
+.tm-sub-header {
+    padding: 0 0 20px;
+    font-size: 16px;
+}
+
+.tm-login-btn {
+    background-color: dodgerblue;
+    margin: 20px 0;
+}
+
+.tm-main-footer {
+    font-size: 12px;
+    padding: 5px 0 10px;
+}
+
+.tm-sub-footer {
+    color: lightgrey;
+    font-size: 10px;
+}
+

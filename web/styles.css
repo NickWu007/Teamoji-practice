@@ -1,15 +1,18 @@
 /* Copyright (c) 2017, NickWu. All rights reserved. Use of this source code
    is governed by a BSD-style license that can be found in the LICENSE file. */
-
 @import url(https://fonts.googleapis.com/css?family=Roboto);
 @import url(https://fonts.googleapis.com/css?family=Material+Icons);
 
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
 body {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 5vw;
+    margin: 0;
+    background-color: deepskyblue;
 }
 
 * {
-  font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
 }
