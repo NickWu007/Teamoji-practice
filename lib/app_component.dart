@@ -17,5 +17,4 @@ import 'package:angular_components/angular_components.dart';
   providers: const [materialProviders],
 )
 class AppComponent {
-  // Nothing here yet. All logic is in TodoListComponent.
 }

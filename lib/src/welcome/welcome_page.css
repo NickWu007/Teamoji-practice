@@ -10,8 +10,6 @@
     align-items: center;
     flex-direction: column;
     text-align: center;
-    margin-top: auto;
-    align-self: center;
 }
 
 .tm-app-icon {
