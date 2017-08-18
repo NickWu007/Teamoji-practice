@@ -5,7 +5,7 @@ import 'package:Teamoji_tutorial/src/create_team/create_team.dart';
 import 'package:Teamoji_tutorial/src/welcome/welcome_page.dart';
 import 'package:angular2/angular2.dart';
 import 'package:angular_components/angular_components.dart';
-
+import 'package:angular2/router.dart';
 
 // AngularDart info: https://webdev.dartlang.org/angular
 // Components info: https://webdev.dartlang.org/components
@@ -17,9 +17,23 @@ import 'package:angular_components/angular_components.dart';
   directives: const [
     materialDirectives,
     WelcomePageComponent,
-    CreateTeamComponent
+    CreateTeamComponent,
+    ROUTER_DIRECTIVES,
   ],
-  providers: const [materialProviders],
+  providers: const [
+    materialProviders,
+  ],
 )
+@RouteConfig(const[
+  const Route(path: '/welcome',
+      name: 'Welcome',
+      component: WelcomePageComponent,
+      useAsDefault: true
+      ),
+  const Route(path: '/create',
+      name: 'Create New Team',
+      component: CreateTeamComponent,
+      )
+])
 class AppComponent {
 }
