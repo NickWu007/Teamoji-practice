@@ -1,11 +1,8 @@
-:host {
-    background-color: deepskyblue;
-    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-    color: white;
-}
-
 .tm-welcome {
     height: 100%;
+    width: 100%;
+    background-color: deepskyblue;
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
