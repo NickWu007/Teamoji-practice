@@ -1,0 +1,17 @@
+<div class="tm-create-team">
+    <div class="tm-icon">{{pageIcon}}</div>
+    <div class="tm-prompt-header">{{createTeamPromptHeader}}</div>
+    <div class="tm-prompt-content">{{createTeamPromptContent}}</div>
+    <material-input
+            floatingLabel
+            label="Name of your new team"
+            name="text"
+            (change)="newTeamName = $event">
+    </material-input>
+    <material-button
+            raised
+            class="tm-btn"
+            (trigger)="create()">
+        {{createTeamButtonMessage}}
+    </material-button>
+</div>

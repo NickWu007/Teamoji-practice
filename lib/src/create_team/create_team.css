@@ -1,0 +1,34 @@
+:host {
+    font-family: Verdana, sans-serif;
+    color: white;
+}
+
+.tm-icon {
+    margin-top: -50px;
+    font-size: 125px;
+}
+
+.tm-create-team {
+    background-color: seagreen;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+
+.tm-prompt-header {
+    font-size: 16px;
+}
+
+.tm-prompt-header {
+    font-size : 24px;
+}
+
+.tm-btn {
+    background-color: dodgerblue;
+    margin: 20px 0;
+}
