@@ -14,7 +14,11 @@ import 'package:angular_components/angular_components.dart';
   selector: 'my-app',
   styleUrls: const ['app_component.css'],
   templateUrl: 'app_component.html',
-  directives: const [materialDirectives, WelcomePageComponent, CreateTeamComponent],
+  directives: const [
+    materialDirectives,
+    WelcomePageComponent,
+    CreateTeamComponent
+  ],
   providers: const [materialProviders],
 )
 class AppComponent {
