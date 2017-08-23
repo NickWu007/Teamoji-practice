@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:Teamoji_tutorial/src/common/messages.dart';
 import 'package:angular2/core.dart';
 import 'package:angular_components/angular_components.dart';
 
@@ -12,16 +13,7 @@ import 'package:angular_components/angular_components.dart';
     NgModel,
   ],
 )
-class CreateTeamComponent {
-
-  String get createTeamPromptHeader => 'Feeling a little lonely?';
-
-  String get createTeamPromptContent => 'Let\'s make a new team!';
-
-  String get pageIcon => '\u{1F914}';
-
-  String get createTeamButtonMessage => 'create team';
-
+class CreateTeamComponent extends CreateTeamMessages {
   String newTeamName = null;
 
   Future<Null> create() async {
