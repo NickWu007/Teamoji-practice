@@ -1,0 +1,36 @@
+.tm-emoji-select-content {
+    background-color: white;
+    height: 95%;
+    padding: 8px;
+    width: 100%;
+}
+
+.tm-emoji-select-header {
+    background-color: lightgray;
+    display:flex;
+    height: 5%;
+    width: 100%;
+}
+
+.tm-emoji-select-header-message {
+    flex-grow: 1;
+    font-family: sans-serif;
+    text-align: left;
+    padding: 2% 8px;
+}
+
+.tm-emoji-select-list {
+    margin: 0;
+    padding: 0;
+}
+
+.tm-emoji-select-item {
+    display: inline-block;
+    height: 24px;
+    padding: 0 2px;
+}
+
+.tm-emoji-select-item-btn {
+    height: 24px;
+    width: 24px;
+}

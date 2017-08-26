@@ -1,0 +1,13 @@
+<div class="tm-emoji-select-header">
+    <div class="tm-emoji-select-header-message">{{promptSelectMessage}}</div>
+    <material-button class="tm-emoji-select-header-button" icon (trigger)="onCancel()">
+        <glyph icon="clear"></glyph>
+    </material-button>
+</div>
+<div class="tm-emoji-select-content">
+    <ul class="tm-emoji-select-list">
+        <li *ngFor="let emoji of allEmojis" class="tm-emoji-select-item" (click)="onSelect(emoji)">
+            <emoji-render [useBigIcon]="false" [icon]="emoji"></emoji-render>
+        </li>
+    </ul>
+</div>
