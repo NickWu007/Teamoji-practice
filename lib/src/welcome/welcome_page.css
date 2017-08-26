@@ -1,32 +1,5 @@
-.tm-welcome {
-    height: 100%;
-    width: 100%;
-    background-color: deepskyblue;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-}
-
 .tm-app-icon {
     margin-top: -50px;
-    font-size: 125px;
-}
-
-.tm-main-header {
-    font-size: 40px;
-}
-
-.tm-sub-header {
-    padding: 0 0 20px;
-    font-size: 16px;
-}
-
-.tm-login-btn {
-    background-color: dodgerblue;
-    margin: 20px 0;
 }
 
 .tm-main-footer {
@@ -34,8 +7,33 @@
     padding: 5px 0 10px;
 }
 
+.tm-main-header {
+    font-size: 40px;
+}
+
+.tm-login-btn {
+    background-color: dodgerblue;
+    margin: 20px 0;
+}
+
 .tm-sub-footer {
     color: lightgrey;
     font-size: 10px;
 }
 
+.tm-sub-header {
+    padding: 0 0 20px;
+    font-size: 16px;
+}
+
+.tm-welcome {
+    align-items: center;
+    background-color: deepskyblue;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+}

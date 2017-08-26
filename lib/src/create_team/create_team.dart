@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:Teamoji_tutorial/src/common/messages.dart';
+import 'package:Teamoji_tutorial/src/emoji_render/emoji_render.dart';
 import 'package:angular2/core.dart';
 import 'package:angular_components/angular_components.dart';
 
@@ -8,6 +9,7 @@ import 'package:angular_components/angular_components.dart';
   templateUrl: 'create_team.html',
   styleUrls: const ['create_team.css'],
   directives: const [
+    EmojiRenderComponent,
     MaterialButtonComponent,
     MaterialInputComponent,
     NgModel,

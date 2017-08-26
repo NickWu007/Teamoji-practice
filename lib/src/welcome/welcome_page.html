@@ -1,5 +1,6 @@
 <div class="tm-welcome">
-    <div class="tm-app-icon">{{appIcon}}</div>
+    <emoji-render [useBigIcon]="true" [icon]="appIcon"></emoji-render>
+    <!--<div class="tm-app-icon">{{appIcon}}</div>-->
     <div class="tm-main-header">{{appTitle}}</div>
     <div class="tm-sub-header">{{appSubtitle}}</div>
     <material-button raised class="tm-login-btn" (trigger)="login()">{{signInMessage}}</material-button>
