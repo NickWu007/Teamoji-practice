@@ -1,0 +1,30 @@
+.tm-home-drawer {
+    background-color: white;
+    height: 100%;
+    max-width: 200px;
+    margin-left: 0;
+}
+
+.material-header-row {
+    background-color: orange;
+    display: flex;
+}
+
+.tm-prev-emoji-item {
+    display: inline-block;
+}
+
+.material-header-title {
+    padding: 10px 5px 0 0;
+}
+
+.main-content {
+    height: 100%;
+    width: 100%;
+}
+
+.material-content {
+    height: 100%;
+    background: yellow;
+    padding: 8px;
+}

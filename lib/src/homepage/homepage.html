@@ -1,0 +1,20 @@
+<!--<modal [(visible)]="visible">-->
+<!--<matieral-dialog class="tm-home-drawer" *deferredContent>-->
+<!--<div>Here is some drawer content.</div>-->
+<!--</matieral-dialog>-->
+<!--</modal>-->
+<div class="main-content">
+    <div class="material-header-row">
+        <material-button class="material-drawer-button" icon>
+            <glyph icon="menu"></glyph>
+        </material-button>
+        <div class="material-header-title">Header</div>
+    </div>
+    <div class="material-content">
+        <ul>
+            <li *ngFor="let emoji of previousEmojis" class="tm-prev-emoji-item">
+                <emoji-render [useBigIcon]="true" [icon]="emoji"></emoji-render>
+            </li>
+        </ul>
+    </div>
+</div>

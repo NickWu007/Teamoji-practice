@@ -3,10 +3,11 @@
 
 import 'package:Teamoji_tutorial/src/create_team/create_team.dart';
 import 'package:Teamoji_tutorial/src/emoji_selector/emoji_selector.dart';
+import 'package:Teamoji_tutorial/src/homepage/homepage.dart';
 import 'package:Teamoji_tutorial/src/welcome/welcome_page.dart';
-import 'package:angular2/angular2.dart';
+import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import 'package:angular2/router.dart';
+import 'package:angular_router/angular_router.dart';
 
 // AngularDart info: https://webdev.dartlang.org/angular
 // Components info: https://webdev.dartlang.org/components
@@ -40,6 +41,11 @@ import 'package:angular2/router.dart';
     path: '/select',
     name: 'New Emoji',
     component: EmojiSelectorComponent,
+  ),
+  const Route(
+    path: '/homepage',
+    name: 'Homepage',
+    component: HomepageComponent,
   )
 ])
 class AppComponent {}

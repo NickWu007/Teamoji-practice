@@ -26,6 +26,15 @@ abstract class EmojiSelectorMessages {
   String get promptSelectMessage => 'Select an Emoji';
 }
 
+
+abstract class HomepaheMessages {
+  String get drawerHeaderMessage => 'Your Teams';
+
+  String get createTeamButtonMessage => 'Create Team';
+
+  String get signOutButtonMessage => 'Sign Out';
+}
+
 abstract class EmojiList {
   List<String> get allEmojis => const [
         '\u{1F60B}',
