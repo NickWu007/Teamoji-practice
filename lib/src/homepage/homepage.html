@@ -6,14 +6,14 @@
 <div class="main-content">
     <div class="material-header-row">
         <material-button class="material-drawer-button" icon>
-            <glyph icon="menu"></glyph>
+            <material-icon icon="menu"></material-icon>
         </material-button>
         <div class="material-header-title">Header</div>
     </div>
     <div class="material-content">
-        <ul>
+        <ul style="padding-left: 0;">
             <li *ngFor="let emoji of previousEmojis" class="tm-prev-emoji-item">
-                <emoji-render [useBigIcon]="true" [icon]="emoji"></emoji-render>
+                <user-post [emoji]="emoji"></user-post>
             </li>
         </ul>
     </div>

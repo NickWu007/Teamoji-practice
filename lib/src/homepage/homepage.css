@@ -1,3 +1,7 @@
+:host {
+    background: lightyellow;
+}
+
 .tm-home-drawer {
     background-color: white;
     height: 100%;
@@ -6,12 +10,13 @@
 }
 
 .material-header-row {
-    background-color: orange;
+    background-color: yellow;
     display: flex;
 }
 
 .tm-prev-emoji-item {
     display: inline-block;
+    padding: 0 20px;
 }
 
 .material-header-title {
@@ -25,6 +30,5 @@
 
 .material-content {
     height: 100%;
-    background: yellow;
     padding: 8px;
 }

@@ -1,4 +1,4 @@
-import 'package:Teamoji_tutorial/src/emoji_render/emoji_render.dart';
+import 'package:Teamoji_tutorial/src/user_post/user_post.dart';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 
@@ -6,9 +6,9 @@ import 'package:angular_components/angular_components.dart';
     selector: 'homepage',
     directives: const [
       DeferredContentDirective,
-      EmojiRenderComponent,
+      UserPostComponent,
       MaterialButtonComponent,
-      GlyphComponent,
+      MaterialIconComponent,
       ModalComponent,
       MaterialDialogComponent,
       NgFor,

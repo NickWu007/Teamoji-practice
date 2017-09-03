@@ -1,0 +1,10 @@
+.tm-user-profile-image {
+    border-radius: 50%;
+    height: 25px;
+    weight: 25px;
+}
+
+.tm-user-post-timestamp {
+    text-align: right;
+    color: lightgray;
+}
