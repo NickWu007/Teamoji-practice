@@ -3,14 +3,45 @@
 }
 
 .tm-home-drawer {
-    background-color: white;
     height: 100%;
-    max-width: 200px;
-    margin-left: 0;
+    background-color: deepskyblue;
+    color: white;
+}
+
+.tm-home-drawer-header-row {
+    background-color: dodgerblue;
+    line-height: 50px;
+    padding-left: 8px;
+    vertical-align: middle;
+    font-weight: bolder;
+}
+
+.tm-home-drawer-list {
+    background-color: transparent;
+}
+
+.tm-team-list-item {
+    background-color: transparent !important;
+    color: lightgray;
+}
+
+.deep-blue {
+    background-color: dodgerblue !important;
+    color: white;
+}
+
+.tm-home-drawer-btn {
+    display: flex;
+    justify-content: center;
+}
+
+.tm-home-drawer-btn {
+    margin: 8px 8px !important;
+    color: white;
 }
 
 .material-header-row {
-    background-color: yellow;
+    background-color: orange;
     display: flex;
 }
 
@@ -19,16 +50,24 @@
     padding: 0 20px;
 }
 
-.material-header-title {
+.tm-main-content-header-title {
     padding: 10px 5px 0 0;
 }
 
-.main-content {
+.tm-main-content {
     height: 100%;
     width: 100%;
 }
 
-.material-content {
+.tm-main-content-content {
     height: 100%;
     padding: 8px;
+}
+
+.tm-add-post-icon {
+    color: white;
+    background-color: deepskyblue;
+    position: fixed;
+    right: 12px;
+    bottom: 12px;
 }

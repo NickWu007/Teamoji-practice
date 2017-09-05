@@ -27,7 +27,7 @@ abstract class EmojiSelectorMessages {
 }
 
 
-abstract class HomepaheMessages {
+abstract class HomepageMessages {
   String get drawerHeaderMessage => 'Your Teams';
 
   String get createTeamButtonMessage => 'Create Team';

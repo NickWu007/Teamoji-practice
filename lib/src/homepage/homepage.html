@@ -1,20 +1,42 @@
-<!--<modal [(visible)]="visible">-->
-<!--<matieral-dialog class="tm-home-drawer" *deferredContent>-->
-<!--<div>Here is some drawer content.</div>-->
-<!--</matieral-dialog>-->
-<!--</modal>-->
-<div class="main-content">
-    <div class="material-header-row">
-        <material-button class="material-drawer-button" icon>
+<material-drawer temporary #drawer="drawer"
+                 [attr.overlay]="true">
+    <div *deferredContent class="tm-home-drawer">
+        <div class="tm-home-drawer-header-row">
+            {{drawerHeaderMessage}}
+        </div>
+        <material-list class="tm-home-drawer-list">
+            <material-list-item *ngFor="let team of teams"
+                                class="tm-team-list-item"
+                                [class.deep-blue]="shouldShowAsDeepBlue(team)"
+                                (trigger)="onChangeTeam(team)">
+                {{team}}
+            </material-list-item>
+        </material-list>
+        <div class="tm-home-drawer-btns">
+            <material-button class="tm-home-drawer-btn deep-blue" (trigger)="onCreateTeam()">
+                {{createTeamButtonMessage}}
+            </material-button>
+            <material-button class="tm-home-drawer-btn deep-blue" (trigger)="onSignOut()">
+                {{signOutButtonMessage}}
+            </material-button>
+        </div>
+    </div>
+</material-drawer>
+<div class="tm-main-content">
+    <div class="tm-main-content-header-row">
+        <material-button class="material-drawer-button" icon (trigger)="drawer.toggle()">
             <material-icon icon="menu"></material-icon>
         </material-button>
         <div class="material-header-title">Header</div>
     </div>
-    <div class="material-content">
+    <div class="tm-main-content-content">
         <ul style="padding-left: 0;">
             <li *ngFor="let emoji of previousEmojis" class="tm-prev-emoji-item">
                 <user-post [emoji]="emoji"></user-post>
             </li>
         </ul>
     </div>
+    <material-fab class="tm-add-post-icon" aria-label="add" raised (trigger)="onAddPost()">
+        <material-icon icon="add" size="x-large"></material-icon>
+    </material-fab>
 </div>
