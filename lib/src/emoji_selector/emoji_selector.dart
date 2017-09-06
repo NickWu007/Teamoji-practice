@@ -8,7 +8,7 @@ import 'package:angular_components/angular_components.dart';
   templateUrl: 'emoji_selector.html',
   directives: const [
     EmojiRenderComponent,
-    GlyphComponent,
+    MaterialIconComponent,
     MaterialButtonComponent,
     NgFor,
   ],
