@@ -1,7 +1,14 @@
+import 'dart:async';
 import 'package:Teamoji_tutorial/src/common/messages.dart';
+import 'package:Teamoji_tutorial/src/create_team/create_team.dart';
+import 'package:Teamoji_tutorial/src/services/firebase_service.dart';
 import 'package:Teamoji_tutorial/src/user_post/user_post.dart';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
+
+enum ShowingComponent {
+  homepage, create_team, emoji_selector,
+}
 
 @Component(
     selector: 'homepage',
@@ -16,15 +23,23 @@ import 'package:angular_components/angular_components.dart';
       MaterialTemporaryDrawerComponent,
       ModalComponent,
       NgFor,
+      NgIf,
       UserPostComponent,
+      CreateTeamComponent,
+      NgSwitch,
+      NgSwitchWhen,
     ],
     templateUrl: 'homepage.html',
     styleUrls: const [
       'homepage.css',
     ])
 class HomepageComponent extends HomepageMessages{
+  FirebaseService _fbService;
   bool visible = false;
   String _currentTeam = '';
+  String currentComponent = 'homepage';
+
+  final showingComponent = ShowingComponent;
 
   List<String> _mockEmojiList = const [
     '\u{1F60B}',
@@ -33,24 +48,15 @@ class HomepageComponent extends HomepageMessages{
     '\u{1F618}',
     '\u{1F617}',
     '\u{1F619}',
-    '\u{1F61A}',
-    '\u{1F607}',
-    '\u{1F610}',
-    '\u{1F611}',
-    '\u{1F636}',
-    '\u{1F60F}',
-  ];
-
-  List<String> _mockTeamList = const [
-    'Google',
-    'Firebase',
   ];
 
   List<String> get previousEmojis => _mockEmojiList;
 
-  List<String> get teams => _mockTeamList;
+  List<String> get teams => _fbService.groups;
 
   bool shouldShowAsDeepBlue(String team) => team == _currentTeam;
+
+  HomepageComponent(this._fbService);
 
   void onChangeTeam(String team) {
     print('You want to change to team: $team');
@@ -59,7 +65,10 @@ class HomepageComponent extends HomepageMessages{
 
   void onAddPost() => print('should show select emoji component');
 
-  void onCreateTeam() => print('You want to create a new team!');
+  void onCreateTeam() {
+    print('You want to create a new team!');
+    currentComponent = 'create_team';
+  }
 
-  void onSignOut() => print('You want to sign out!');
+  Future onSignOut() async => await _fbService.signOut();
 }

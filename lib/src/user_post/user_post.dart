@@ -12,4 +12,9 @@ import 'package:angular/angular.dart';
 class UserPostComponent {
   @Input()
   String emoji;
+
+  @Input()
+  String userName;
+
+  String get shortUserName => userName.trim().toUpperCase().substring(0, 1);
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:Teamoji_tutorial/src/common/messages.dart';
 import 'package:Teamoji_tutorial/src/emoji_render/emoji_render.dart';
+import 'package:Teamoji_tutorial/src/services/firebase_service.dart';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 
@@ -12,14 +13,25 @@ import 'package:angular_components/angular_components.dart';
     EmojiRenderComponent,
     MaterialButtonComponent,
     MaterialInputComponent,
-    NgModel,
   ],
 )
 class CreateTeamComponent extends CreateTeamMessages {
   String newTeamName = null;
+  FirebaseService _fbService;
+
+  final StreamController _createTeamStream = new StreamController.broadcast();
+
+  @Output()
+  Stream get onCreate => _createTeamStream.stream;
+
+  CreateTeamComponent(this._fbService);
 
   Future<Null> create() async {
-    print('You want to create a new team called: $newTeamName');
-    newTeamName = '';
+    try {
+      await _fbService.fbDatabase.ref('groups').push(newTeamName);
+      _createTeamStream.add(null);
+    } catch (error) {
+      print("$runtimeType::create() -- $error");
+    }
   }
 }

@@ -1,7 +1,12 @@
 .tm-user-profile-image {
     border-radius: 50%;
-    height: 25px;
-    weight: 25px;
+    height: 30px;
+    width: 30px;
+    background-color: dodgerblue;
+    color: white;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
 }
 
 .tm-user-post-timestamp {
