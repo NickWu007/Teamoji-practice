@@ -12,6 +12,16 @@ abstract class WelcomePageMessages {
   String get appSubFooter => 'source on github';
 }
 
+abstract class JoinTeamMessages {
+      String get joinTeamPromptHeader => 'Already know a team?';
+
+      String get joinTeamPromptContent => 'Join it right now!';
+
+      String get pageIcon => '\u{1F917}';
+
+      String get joinTeamButtonMessage => 'join team';
+}
+
 abstract class CreateTeamMessages {
   String get createTeamPromptHeader => 'Feeling a little lonely?';
 

@@ -1,4 +1,4 @@
-<div *ngIf="!userLoggedIn" class="tm-welcome">
+<div class="tm-welcome">
     <emoji-render [useBigIcon]="true" [icon]="appIcon"></emoji-render>
     <div class="tm-main-header">{{appTitle}}</div>
     <div class="tm-sub-header">{{appSubtitle}}</div>
@@ -6,4 +6,3 @@
     <div class="tm-main-footer">{{appMainFooter}}</div>
     <div class="tm-sub-footer">{{appSubFooter}}</div>
 </div>
-<homepage *ngIf="userLoggedIn"></homepage>

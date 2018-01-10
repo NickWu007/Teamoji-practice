@@ -13,7 +13,7 @@
             </material-list-item>
         </material-list>
         <div class="tm-home-drawer-btns">
-            <material-button class="tm-home-drawer-btn deep-blue" (trigger)="onCreateTeam()">
+            <material-button class="tm-home-drawer-btn deep-blue" (trigger)="drawer.toggle(); currentComponent = 'create_team';">
                 {{createTeamButtonMessage}}
             </material-button>
             <material-button class="tm-home-drawer-btn deep-blue" (trigger)="onSignOut()">
@@ -22,10 +22,10 @@
         </div>
     </div>
 </material-drawer>
-<div [ngSwitch]="currentComponent">
-    <div  class="tm-main-content">
+<div [ngSwitch]="currentComponent" class="tm-main-content">
+    <div *ngSwitchWhen="'homepage'" class="tm-prev-emoji-list">
         <div class="tm-main-content-header-row">
-            <material-button class="material-drawer-button" icon (trigger)="">
+            <material-button class="material-drawer-button" icon (trigger)="drawer.toggle()">
                 <material-icon icon="menu"></material-icon>
             </material-button>
             <div class="tm-main-content-header-title">Header</div>
@@ -41,5 +41,6 @@
             <material-icon icon="add" size="x-large"></material-icon>
         </material-fab>
     </div>
-    <create-team NgSwitchWhenCase="'create_team'" (create)="currentComponent = 'homepage';"></create-team>
+    <emoji-selector *ngSwitchWhen="'select'" (onSelect)="onSelectEmoji($event)"></emoji-selector>
+    <create-team *ngSwitchWhen="'create_team'" (onCreate)="onCreateTeam($event)"></create-team>
 </div>

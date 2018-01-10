@@ -6,28 +6,19 @@ import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 
 @Component(
-  selector: 'create-team',
-  templateUrl: 'create_team.html',
-  styleUrls: const ['create_team.css'],
+  selector: 'join-team',
+  templateUrl: 'join_team.html',
+  styleUrls: const ['join_team.css'],
   directives: const [
     EmojiRenderComponent,
     MaterialButtonComponent,
     MaterialInputComponent,
   ],
 )
-class CreateTeamComponent extends CreateTeamMessages {
+class JoinTeamComponent extends  JoinTeamMessages{
   String newTeamName = null;
 
-  final StreamController _createTeamStream = new StreamController.broadcast();
-
-  @Output()
-  Stream get onCreate => _createTeamStream.stream;
-
-  Future<Null> create() async {
-    try {
-      _createTeamStream.add(newTeamName);
-    } catch (error) {
-      print("$runtimeType::create() -- $error");
-    }
+  Future<Null> join() async {
+    print('you want to join team $newTeamName');
   }
 }

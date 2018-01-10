@@ -51,7 +51,6 @@
 }
 
 .tm-main-content {
-    background: lightyellow;
     height: 100%;
     width: 100%;
 }
@@ -67,4 +66,8 @@
     position: fixed;
     right: 12px;
     bottom: 12px;
+}
+
+.tm-prev-emoji-list {
+    background: lightyellow;
 }

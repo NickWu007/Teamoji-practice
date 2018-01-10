@@ -4,6 +4,7 @@
 import 'package:Teamoji_tutorial/src/create_team/create_team.dart';
 import 'package:Teamoji_tutorial/src/emoji_selector/emoji_selector.dart';
 import 'package:Teamoji_tutorial/src/homepage/homepage.dart';
+import 'package:Teamoji_tutorial/src/join_team/join_team.dart';
 import 'package:Teamoji_tutorial/src/welcome/welcome_page.dart';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
@@ -38,9 +39,9 @@ import 'package:angular_router/angular_router.dart';
     component: CreateTeamComponent,
   ),
   const Route(
-    path: '/select',
-    name: 'New Emoji',
-    component: EmojiSelectorComponent,
+    path: '/join',
+    name: 'Join New Team',
+    component: JoinTeamComponent,
   ),
   const Route(
     path: '/homepage',

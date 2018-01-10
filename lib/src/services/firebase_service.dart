@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:angular/core.dart';
 import 'package:firebase/firebase.dart' as fb;
+import 'secret.dart' as secret;
 
 @Injectable()
 class FirebaseService {
@@ -12,11 +13,7 @@ class FirebaseService {
   List<String> groups;
 
   FirebaseService() {
-    fb.initializeApp(
-        apiKey: "AIzaSyCGTLxROyQbc7P3t9kideeviEqNvEsIa-E",
-        authDomain: "teamoji-cde63.firebaseapp.com",
-        databaseURL: "https://teamoji-cde63.firebaseio.com",
-        storageBucket: "teamoji-cde63.appspot.com");
+    secret.init();
 
     _fbGoogleAuthProvider = new fb.GoogleAuthProvider();
     _fbAuth = fb.auth();

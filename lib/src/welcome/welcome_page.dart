@@ -5,6 +5,7 @@ import 'package:Teamoji_tutorial/src/homepage/homepage.dart';
 import 'package:Teamoji_tutorial/src/services/firebase_service.dart';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
+import 'package:angular_router/angular_router.dart';
 
 @Component(
   selector: 'welcome-page',
@@ -17,18 +18,25 @@ import 'package:angular_components/angular_components.dart';
     HomepageComponent,
   ],
 )
-class WelcomePageComponent extends WelcomePageMessages{
+class WelcomePageComponent extends WelcomePageMessages implements OnInit{
   FirebaseService _fbService;
+  Router _router;
 
-  bool get userLoggedIn => _fbService.user != null;
-
-  WelcomePageComponent(this._fbService);
+  WelcomePageComponent(this._fbService, this._router);
 
   Future<Null> login() async {
-    if (_fbService.user != null) {
-      print('Already signed in as: ${_fbService.user.displayName}');
-    } else {
       await _fbService.signIn();
+      _gotoHomepageIfLoggedIn();
+  }
+
+  @override
+  ngOnInit() {
+    _gotoHomepageIfLoggedIn();
+  }
+
+  void _gotoHomepageIfLoggedIn() {
+    if (_fbService.user != null) {
+      _router.navigate(['Homepage']);
     }
   }
 }

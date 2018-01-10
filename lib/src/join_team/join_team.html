@@ -1,0 +1,17 @@
+<div class="tm-join-team">
+    <emoji-render [useBigIcon]="true" [icon]="pageIcon"></emoji-render>
+    <div class="tm-prompt-header">{{joinTeamPromptHeader}}</div>
+    <div class="tm-prompt-content">{{joinTeamPromptContent}}</div>
+    <material-input
+            floatingLabel
+            label="Name of the team to join"
+            name="text"
+            (change)="newTeamName = $event">
+    </material-input>
+    <material-button
+            raised
+            class="tm-btn"
+            (trigger)="join()">
+        {{joinTeamButtonMessage}}
+    </material-button>
+</div>
