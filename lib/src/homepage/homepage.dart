@@ -64,16 +64,12 @@ class HomepageComponent extends HomepageMessages implements OnInit {
     switchTeam();
   }
 
-  Future onSelectEmoji(String emoji) async {
+  Future onSelectEmoji(Message message) async {
     currentComponent = 'homepage';
-    if (emoji != null) {
-      await _fbService.fbDatabase.ref('messages/' + currentTeam).push({
-        'name': _fbService.user.displayName,
-        'imageURL': _fbService.user.photoURL,
-        'text': emoji.codeUnits,
-        'timestamp': new DateTime.now().toString(),
-      });
-      print('$emoji pushed to firebase');
+    if (message != null) {
+      await _fbService.fbDatabase
+          .ref('messages/' + currentTeam)
+          .push(Message.toMap(message)).future;
     }
   }
 
@@ -134,7 +130,6 @@ class HomepageComponent extends HomepageMessages implements OnInit {
     print('curent team: $currentTeam');
     _fbService.fbDatabase
         .ref('messages/' + currentTeam)
-        .limitToLast(12)
         .onChildAdded
         .listen(buildPrevEmoji);
   }
@@ -143,9 +138,5 @@ class HomepageComponent extends HomepageMessages implements OnInit {
     Map rawMessages = e.snapshot.val();
     print(rawMessages);
     previousEmojis.insert(0, new Message.fromJson(rawMessages));
-//    rawMessages.forEach((key, value) {
-//      print(value);
-//      previousEmojis.insert(0, new Message.fromJson(value));
-//    });
   }
 }
