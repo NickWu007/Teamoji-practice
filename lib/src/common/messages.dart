@@ -13,13 +13,13 @@ abstract class WelcomePageMessages {
 }
 
 abstract class JoinTeamMessages {
-      String get joinTeamPromptHeader => 'Already know a team?';
+  String get joinTeamPromptHeader => 'Already know a team?';
 
-      String get joinTeamPromptContent => 'Join it right now!';
+  String get joinTeamPromptContent => 'Join it right now!';
 
-      String get pageIcon => '\u{1F917}';
+  String get pageIcon => '\u{1F917}';
 
-      String get joinTeamButtonMessage => 'join team';
+  String get joinTeamButtonMessage => 'join team';
 }
 
 abstract class CreateTeamMessages {
@@ -36,13 +36,14 @@ abstract class EmojiSelectorMessages {
   String get promptSelectMessage => 'Select an Emoji';
 }
 
-
 abstract class HomepageMessages {
   String get drawerHeaderMessage => 'Your Teams';
 
   String get createTeamButtonMessage => 'Create Team';
 
   String get signOutButtonMessage => 'Sign Out';
+
+  String get joinTeamButtonMessage => 'Join a team';
 }
 
 abstract class EmojiList {

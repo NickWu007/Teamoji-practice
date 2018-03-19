@@ -1,11 +1,11 @@
 import 'dart:async';
+
 import 'package:Teamoji_tutorial/src/common/messages.dart';
 import 'package:Teamoji_tutorial/src/emoji_render/emoji_render.dart';
 import 'package:Teamoji_tutorial/src/homepage/homepage.dart';
 import 'package:Teamoji_tutorial/src/services/firebase_service.dart';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import 'package:angular_router/angular_router.dart';
 
 @Component(
   selector: 'welcome-page',
@@ -18,15 +18,19 @@ import 'package:angular_router/angular_router.dart';
     HomepageComponent,
   ],
 )
-class WelcomePageComponent extends WelcomePageMessages implements OnInit{
-  FirebaseService _fbService;
-  Router _router;
+class WelcomePageComponent extends WelcomePageMessages implements OnInit {
+  StreamController<String> get stream => new StreamController.broadcast();
 
-  WelcomePageComponent(this._fbService, this._router);
+  @Output()
+  Stream get onPageChange => stream.stream;
+
+  FirebaseService _fbService;
+
+  WelcomePageComponent(this._fbService);
 
   Future<Null> login() async {
-      await _fbService.signIn();
-      _gotoHomepageIfLoggedIn();
+    await _fbService.signIn();
+    _gotoHomepageIfLoggedIn();
   }
 
   @override
@@ -35,8 +39,8 @@ class WelcomePageComponent extends WelcomePageMessages implements OnInit{
   }
 
   void _gotoHomepageIfLoggedIn() {
-    if (_fbService.user != null) {
-      _router.navigate(['Homepage']);
+    if (_fbService.fbAuth.currentUser != null) {
+      this.stream.add('homepage');
     }
   }
 }

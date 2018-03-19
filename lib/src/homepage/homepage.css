@@ -53,6 +53,7 @@
 .tm-main-content {
     height: 100%;
     width: 100%;
+    background-color: lightyellow;
 }
 
 .tm-main-content-content {

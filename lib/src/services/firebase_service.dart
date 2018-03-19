@@ -5,10 +5,9 @@ import 'secret.dart' as secret;
 
 @Injectable()
 class FirebaseService {
-  fb.Auth _fbAuth;
+  fb.Auth fbAuth;
   fb.GoogleAuthProvider _fbGoogleAuthProvider;
   fb.Database fbDatabase;
-  fb.DatabaseReference _fbRefMessages;
   fb.User user;
   List<String> groups;
 
@@ -16,33 +15,34 @@ class FirebaseService {
     secret.init();
 
     _fbGoogleAuthProvider = new fb.GoogleAuthProvider();
-    _fbAuth = fb.auth();
-    _fbAuth.onAuthStateChanged.listen(_authChanged);
+    fbAuth = fb.auth();
+    fbAuth.onAuthStateChanged.listen((user) => this.user = user);
     fbDatabase = fb.database();
-    _fbRefMessages = fbDatabase.ref('groups');
-  }
-
-  void _authChanged(fb.User event) {
-    user = event;
-    if (user != null) {
-      groups = [];
-      _fbRefMessages.onChildAdded
-          .listen((event) {
-        print(event.snapshot.val());
-        groups.add(event.snapshot.val());
-      });
-    }
   }
 
   Future signIn() async {
     try {
-      await _fbAuth.signInWithPopup(_fbGoogleAuthProvider);
+      await fbAuth.signInWithPopup(_fbGoogleAuthProvider);
+      if (fbAuth.currentUser != null) {
+        user = fbAuth.currentUser;
+        final defaultGroups = ['general'];
+        fbDatabase
+            .ref('users_teams/' + fbAuth.currentUser.uid)
+            .onValue
+            .listen((event) async {
+          if (event.snapshot.val() == null) {
+            print('Init general group');
+            await fbDatabase
+                .ref('users_teams/' + fbAuth.currentUser.uid)
+                .set(defaultGroups);
+          }
+          ;
+        });
+      }
     } catch (error) {
       print("$runtimeType::login() -- $error");
     }
   }
 
-  void signOut() {
-    _fbAuth.signOut();
-  }
+  signOut() async => await fbAuth.signOut();
 }

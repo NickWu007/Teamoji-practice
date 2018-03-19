@@ -2,11 +2,16 @@
     border-radius: 50%;
     height: 30px;
     width: 30px;
-    background-color: dodgerblue;
-    color: white;
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
+}
+
+.tm-user-post-user-icon {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-gap: 8px;
+}
+
+.tm-user-post-user-name {
+    padding-top: 4px;
 }
 
 .tm-user-post-timestamp {

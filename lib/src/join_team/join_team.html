@@ -10,8 +10,11 @@
     </material-input>
     <material-button
             raised
+            [disabled]="running"
             class="tm-btn"
             (trigger)="join()">
-        {{joinTeamButtonMessage}}
+        {{buttonText}}
+        <material-spinner *ngIf="running"></material-spinner>
     </material-button>
+    <return-button (onReturn)="joinTeamStream.add(null);"></return-button>
 </div>

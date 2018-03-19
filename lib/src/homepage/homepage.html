@@ -8,13 +8,16 @@
             <material-list-item *ngFor="let team of teams"
                                 class="tm-team-list-item"
                                 [class.deep-blue]="shouldShowAsDeepBlue(team)"
-                                (trigger)="onChangeTeam(team)">
+                                (trigger)="drawer.toggle(); onChangeTeam(team);">
                 {{team}}
             </material-list-item>
         </material-list>
         <div class="tm-home-drawer-btns">
             <material-button class="tm-home-drawer-btn deep-blue" (trigger)="drawer.toggle(); currentComponent = 'create_team';">
                 {{createTeamButtonMessage}}
+            </material-button>
+            <material-button class="tm-home-drawer-btn deep-blue" (trigger)="drawer.toggle(); currentComponent = 'join_team';">
+                {{joinTeamButtonMessage}}
             </material-button>
             <material-button class="tm-home-drawer-btn deep-blue" (trigger)="onSignOut()">
                 {{signOutButtonMessage}}
@@ -28,19 +31,20 @@
             <material-button class="material-drawer-button" icon (trigger)="drawer.toggle()">
                 <material-icon icon="menu"></material-icon>
             </material-button>
-            <div class="tm-main-content-header-title">Header</div>
+            <div class="tm-main-content-header-title">{{currentTeam}}</div>
         </div>
         <div class="tm-main-content-content">
-            <ul style="padding-left: 0;">
-                <li *ngFor="let emoji of previousEmojis" class="tm-prev-emoji-item">
-                    <user-post userName="Nick Wu" [emoji]="emoji"></user-post>
+            <ul style="padding-left: 0; display: grid; grid-template-columns: 1fr 1fr;">
+                <li *ngFor="let message of previousEmojis" class="tm-prev-emoji-item">
+                    <user-post [message]="message"></user-post>
                 </li>
             </ul>
         </div>
-        <material-fab class="tm-add-post-icon" aria-label="add" raised (trigger)="onAddPost()">
+        <material-fab class="tm-add-post-icon" aria-label="add" raised (trigger)="currentComponent = 'select';">
             <material-icon icon="add" size="x-large"></material-icon>
         </material-fab>
     </div>
     <emoji-selector *ngSwitchWhen="'select'" (onSelect)="onSelectEmoji($event)"></emoji-selector>
     <create-team *ngSwitchWhen="'create_team'" (onCreate)="onCreateTeam($event)"></create-team>
+    <join-team *ngSwitchWhen="'join_team'" (onJoin)="currentComponent = 'homepage';"></join-team>
 </div>

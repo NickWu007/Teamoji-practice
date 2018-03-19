@@ -16,7 +16,6 @@ import 'package:angular_components/angular_components.dart';
   styleUrls: const ['emoji_selector.css'],
 )
 class EmojiSelectorComponent extends EmojiSelectorMessages with EmojiList {
-
   final StreamController _selectStream = new StreamController.broadcast();
 
   @Output()
