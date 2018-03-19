@@ -15,8 +15,7 @@ abstract class WelcomePageMessages {
 abstract class CreateTeamMessages {
   String get createTeamPromptHeader => 'Feeling a little lonely?';
 
-  String get createTeamPromptContent1 =>
-      'Make a new team,';
+  String get createTeamPromptContent1 => 'Make a new team,';
 
   String get createTeamPromptContent2 =>
       'or join one where your friends already are!';

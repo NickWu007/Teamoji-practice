@@ -18,7 +18,7 @@ import 'package:angular_components/angular_components.dart';
     HomepageComponent,
   ],
 )
-class WelcomePageComponent extends WelcomePageMessages  {
+class WelcomePageComponent extends WelcomePageMessages {
   StreamController<String> get stream => new StreamController.broadcast();
 
   @Output()

@@ -69,6 +69,6 @@ class HomepageComponent extends HomepageMessages implements OnInit {
 
   @override
   ngOnInit() {
-   service.buildTeams();
+    service.buildTeams();
   }
 }

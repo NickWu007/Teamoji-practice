@@ -28,10 +28,7 @@ class FirebaseService {
   }
 
   void buildTeams() {
-    fbDatabase
-        .ref('users_teams/' + user.uid)
-        .onValue
-        .listen((e) {
+    fbDatabase.ref('users_teams/' + user.uid).onValue.listen((e) {
       print('init database snapshot : ${e.snapshot.val()}');
       teams = [];
       Map rawTeams = e.snapshot.val();
