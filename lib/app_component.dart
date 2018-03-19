@@ -36,6 +36,7 @@ class AppComponent implements OnInit {
 
   @override
   ngOnInit() {
+    service.init();
     service.fbAuth.onAuthStateChanged.listen((user) {
       if (user != null) {
         currentPage = 'homepage';

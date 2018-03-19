@@ -12,24 +12,18 @@ abstract class WelcomePageMessages {
   String get appSubFooter => 'source on github';
 }
 
-abstract class JoinTeamMessages {
-  String get joinTeamPromptHeader => 'Already know a team?';
-
-  String get joinTeamPromptContent => 'Join it right now!';
-
-  String get pageIcon => '\u{1F917}';
-
-  String get joinTeamButtonMessage => 'join team';
-}
-
 abstract class CreateTeamMessages {
   String get createTeamPromptHeader => 'Feeling a little lonely?';
 
-  String get createTeamPromptContent => 'Let\'s make a new team!';
+  String get createTeamPromptContent1 =>
+      'Make a new team,';
+
+  String get createTeamPromptContent2 =>
+      'or join one where your friends already are!';
 
   String get pageIcon => '\u{1F914}';
 
-  String get createTeamButtonMessage => 'create team';
+  String get createTeamButtonMessage => 'create/join team';
 }
 
 abstract class EmojiSelectorMessages {

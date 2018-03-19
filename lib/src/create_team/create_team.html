@@ -1,7 +1,8 @@
 <div class="tm-create-team">
     <emoji-render [useBigIcon]="true" [icon]="pageIcon"></emoji-render>
     <div class="tm-prompt-header">{{createTeamPromptHeader}}</div>
-    <div class="tm-prompt-content">{{createTeamPromptContent}}</div>
+    <div class="tm-prompt-content">{{createTeamPromptContent1}}</div>
+    <div class="tm-prompt-content">{{createTeamPromptContent2}}</div>
     <material-input
             floatingLabel
             label="Name of your new team"
@@ -14,5 +15,7 @@
             (trigger)="create()">
         {{createTeamButtonMessage}}
     </material-button>
-    <return-button (onReturn)="returnToHomePage()"></return-button>
+    <material-button icon (trigger)="returnToHomePage()" class="tl-return-button">
+        <material-icon icon="arrow_back"></material-icon>
+    </material-button>
 </div>

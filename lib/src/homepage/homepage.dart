@@ -4,12 +4,10 @@ import 'package:Teamoji_tutorial/src/common/message.dart';
 import 'package:Teamoji_tutorial/src/common/messages.dart';
 import 'package:Teamoji_tutorial/src/create_team/create_team.dart';
 import 'package:Teamoji_tutorial/src/emoji_selector/emoji_selector.dart';
-import 'package:Teamoji_tutorial/src/join_team/join_team.dart';
 import 'package:Teamoji_tutorial/src/services/firebase_service.dart';
 import 'package:Teamoji_tutorial/src/user_post/user_post.dart';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import 'package:firebase/firebase.dart';
 
 @Component(
     selector: 'homepage',
@@ -30,16 +28,14 @@ import 'package:firebase/firebase.dart';
       NgSwitch,
       NgSwitchWhen,
       EmojiSelectorComponent,
-      JoinTeamComponent,
     ],
     templateUrl: 'homepage.html',
     styleUrls: const [
       'homepage.css',
     ])
 class HomepageComponent extends HomepageMessages implements OnInit {
-  FirebaseService _fbService;
+  FirebaseService service;
   bool visible = false;
-  String currentTeam = '';
   String currentComponent = 'homepage';
 
   final StreamController<String> stream = new StreamController.broadcast();
@@ -47,97 +43,32 @@ class HomepageComponent extends HomepageMessages implements OnInit {
   @Output()
   Stream get onPageChange => stream.stream;
 
-  List<Message> previousEmojis;
+  bool shouldShowAsDeepBlue(String team) => team == service.currentTeam;
 
-  List<String> teams;
+  String get imageURL => service.user.photoURL;
 
-  bool shouldShowAsDeepBlue(String team) => team == currentTeam;
-
-  String get imageURL => _fbService.user.photoURL;
-
-  HomepageComponent(this._fbService);
-
-  void onChangeTeam(String team) {
-    print('You want to change to team: $team');
-    if (currentTeam == team) return;
-    currentTeam = team;
-    switchTeam();
-  }
+  HomepageComponent(this.service);
 
   Future onSelectEmoji(Message message) async {
     currentComponent = 'homepage';
-    if (message != null) {
-      await _fbService.fbDatabase
-          .ref('messages/' + currentTeam)
-          .push(Message.toMap(message))
-          .future;
-    }
+    await service.postNewMessage(message);
   }
 
   Future onCreateTeam(String teamName) async {
+    print('create event sent to homepage');
     currentComponent = 'homepage';
     if (teamName == null) return;
     print("create team emoji wants to create $teamName");
-    _fbService.fbDatabase.ref('messages/$teamName').onValue.listen((e) async {
-      if (e.snapshot.val() == null) {
-        print('should push to teams');
-        await _fbService.fbDatabase
-            .ref('users_teams/' + _fbService.fbAuth.currentUser.uid)
-            .push(teamName);
-        print("new team name pushed to firebase");
-      }
-    });
-  }
-
-  Future onJoinTeam() async {
-    final uid = _fbService.user.uid;
-    _fbService.fbDatabase
-        .ref('users_teams/' + uid)
-        .onValue
-        .listen((event) async {
-      DataSnapshot snapshot = event.snapshot;
-      print(snapshot.val());
-      if (snapshot.val() == 'empty') {
-        await _fbService.fbDatabase
-            .ref('users_teams/' + uid)
-            .set(_fbService.groups);
-        print("updated user team to non empty.");
-      }
-    });
+    await service.createTeam(teamName);
   }
 
   Future onSignOut() async {
-    await _fbService.signOut();
+    await service.signOut();
     stream.add('welcome');
   }
 
   @override
   ngOnInit() {
-    _fbService.fbDatabase
-        .ref('users_teams/' + _fbService.user.uid)
-        .onValue
-        .listen((e) {
-      print('init database snapshot : ${e.snapshot.val()}');
-      teams = [];
-      Map rawTeams = e.snapshot.val();
-      rawTeams.forEach((k, v) => teams.add(v));
-      currentTeam = teams[0];
-      switchTeam();
-    });
-  }
-
-  void switchTeam() {
-    previousEmojis = [];
-    print('curent team: $currentTeam');
-    _fbService.fbDatabase
-        .ref('messages/' + currentTeam)
-        .onChildAdded
-        .listen(buildPrevEmoji);
-  }
-
-  buildPrevEmoji(e) {
-    Map rawMessages = e.snapshot.val();
-    print(rawMessages);
-    previousEmojis.insert(0, new Message.fromJson(rawMessages));
+   service.buildTeams();
   }
 }

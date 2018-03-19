@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:Teamoji_tutorial/src/common/messages.dart';
 import 'package:Teamoji_tutorial/src/emoji_render/emoji_render.dart';
-import 'package:Teamoji_tutorial/src/return_button/return_button.dart';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 
@@ -14,7 +13,7 @@ import 'package:angular_components/angular_components.dart';
     EmojiRenderComponent,
     MaterialButtonComponent,
     MaterialInputComponent,
-    ReturnButtonComponent,
+    MaterialIconComponent,
   ],
 )
 class CreateTeamComponent extends CreateTeamMessages {

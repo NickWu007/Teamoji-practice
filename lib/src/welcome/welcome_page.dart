@@ -18,29 +18,18 @@ import 'package:angular_components/angular_components.dart';
     HomepageComponent,
   ],
 )
-class WelcomePageComponent extends WelcomePageMessages implements OnInit {
+class WelcomePageComponent extends WelcomePageMessages  {
   StreamController<String> get stream => new StreamController.broadcast();
 
   @Output()
   Stream get onPageChange => stream.stream;
 
-  FirebaseService _fbService;
+  FirebaseService service;
 
-  WelcomePageComponent(this._fbService);
+  WelcomePageComponent(this.service);
 
   Future<Null> login() async {
-    await _fbService.signIn();
-    _gotoHomepageIfLoggedIn();
-  }
-
-  @override
-  ngOnInit() {
-    _gotoHomepageIfLoggedIn();
-  }
-
-  void _gotoHomepageIfLoggedIn() {
-    if (_fbService.fbAuth.currentUser != null) {
-      this.stream.add('homepage');
-    }
+    await service.signIn();
+    if (service.fbAuth.currentUser != null) this.stream.add('homepage');
   }
 }
