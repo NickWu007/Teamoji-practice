@@ -75,3 +75,5 @@ pubspec.lock
 
 # Directory created by dartdoc
 doc/api/
+
+lib/src/services/secret.dart

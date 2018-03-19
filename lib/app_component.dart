@@ -1,13 +1,11 @@
 // Copyright (c) 2017, NickWu. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
-import 'package:Teamoji_tutorial/src/create_team/create_team.dart';
-import 'package:Teamoji_tutorial/src/emoji_selector/emoji_selector.dart';
 import 'package:Teamoji_tutorial/src/homepage/homepage.dart';
+import 'package:Teamoji_tutorial/src/services/firebase_service.dart';
 import 'package:Teamoji_tutorial/src/welcome/welcome_page.dart';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
-import 'package:angular_router/angular_router.dart';
 
 // AngularDart info: https://webdev.dartlang.org/angular
 // Components info: https://webdev.dartlang.org/components
@@ -19,33 +17,30 @@ import 'package:angular_router/angular_router.dart';
   directives: const [
     materialDirectives,
     WelcomePageComponent,
-    CreateTeamComponent,
-    ROUTER_DIRECTIVES,
+    HomepageComponent,
+    NgSwitch,
+    NgSwitchWhen,
   ],
   providers: const [
     materialProviders,
+    FirebaseService,
   ],
 )
-@RouteConfig(const [
-  const Route(
-      path: '/welcome',
-      name: 'Welcome',
-      component: WelcomePageComponent,
-      useAsDefault: true),
-  const Route(
-    path: '/create',
-    name: 'Create New Team',
-    component: CreateTeamComponent,
-  ),
-  const Route(
-    path: '/select',
-    name: 'New Emoji',
-    component: EmojiSelectorComponent,
-  ),
-  const Route(
-    path: '/homepage',
-    name: 'Homepage',
-    component: HomepageComponent,
-  )
-])
-class AppComponent {}
+class AppComponent implements OnInit {
+  FirebaseService service;
+  String currentPage = 'welcome';
+
+  AppComponent(this.service);
+
+  void onPageChange(String nextPage) => currentPage = nextPage;
+
+  @override
+  ngOnInit() {
+    service.init();
+    service.fbAuth.onAuthStateChanged.listen((user) {
+      if (user != null) {
+        currentPage = 'homepage';
+      }
+    });
+  }
+}

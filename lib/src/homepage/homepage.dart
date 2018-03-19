@@ -1,4 +1,10 @@
+import 'dart:async';
+
+import 'package:Teamoji_tutorial/src/common/message.dart';
 import 'package:Teamoji_tutorial/src/common/messages.dart';
+import 'package:Teamoji_tutorial/src/create_team/create_team.dart';
+import 'package:Teamoji_tutorial/src/emoji_selector/emoji_selector.dart';
+import 'package:Teamoji_tutorial/src/services/firebase_service.dart';
 import 'package:Teamoji_tutorial/src/user_post/user_post.dart';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
@@ -16,50 +22,53 @@ import 'package:angular_components/angular_components.dart';
       MaterialTemporaryDrawerComponent,
       ModalComponent,
       NgFor,
+      NgIf,
       UserPostComponent,
+      CreateTeamComponent,
+      NgSwitch,
+      NgSwitchWhen,
+      EmojiSelectorComponent,
     ],
     templateUrl: 'homepage.html',
     styleUrls: const [
       'homepage.css',
     ])
-class HomepageComponent extends HomepageMessages{
+class HomepageComponent extends HomepageMessages implements OnInit {
+  FirebaseService service;
   bool visible = false;
-  String _currentTeam = '';
+  String currentComponent = 'homepage';
 
-  List<String> _mockEmojiList = const [
-    '\u{1F60B}',
-    '\u{1F60E}',
-    '\u{1F60D}',
-    '\u{1F618}',
-    '\u{1F617}',
-    '\u{1F619}',
-    '\u{1F61A}',
-    '\u{1F607}',
-    '\u{1F610}',
-    '\u{1F611}',
-    '\u{1F636}',
-    '\u{1F60F}',
-  ];
+  final StreamController<String> stream = new StreamController.broadcast();
 
-  List<String> _mockTeamList = const [
-    'Google',
-    'Firebase',
-  ];
+  @Output()
+  Stream get onPageChange => stream.stream;
 
-  List<String> get previousEmojis => _mockEmojiList;
+  bool shouldShowAsDeepBlue(String team) => team == service.currentTeam;
 
-  List<String> get teams => _mockTeamList;
+  String get imageURL => service.user.photoURL;
 
-  bool shouldShowAsDeepBlue(String team) => team == _currentTeam;
+  HomepageComponent(this.service);
 
-  void onChangeTeam(String team) {
-    print('You want to change to team: $team');
-    _currentTeam = team;
+  Future onSelectEmoji(Message message) async {
+    currentComponent = 'homepage';
+    await service.postNewMessage(message);
   }
 
-  void onAddPost() => print('should show select emoji component');
+  Future onCreateTeam(String teamName) async {
+    print('create event sent to homepage');
+    currentComponent = 'homepage';
+    if (teamName == null) return;
+    print("create team emoji wants to create $teamName");
+    await service.createTeam(teamName);
+  }
 
-  void onCreateTeam() => print('You want to create a new team!');
+  Future onSignOut() async {
+    await service.signOut();
+    stream.add('welcome');
+  }
 
-  void onSignOut() => print('You want to sign out!');
+  @override
+  ngOnInit() {
+    service.buildTeams();
+  }
 }

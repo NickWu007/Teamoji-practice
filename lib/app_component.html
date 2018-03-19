@@ -1,1 +1,4 @@
-<router-outlet></router-outlet>
+<div [ngSwitch]="currentPage" class="tm-page">
+    <welcome-page *ngSwitchWhen="'welcome'" (onPageChange)="onPageChange($event)"></welcome-page>
+    <homepage *ngSwitchWhen="'homepage'" (onPageChange)="onPageChange($event)"></homepage>
+</div>

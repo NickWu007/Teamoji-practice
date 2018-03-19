@@ -15,17 +15,19 @@ abstract class WelcomePageMessages {
 abstract class CreateTeamMessages {
   String get createTeamPromptHeader => 'Feeling a little lonely?';
 
-  String get createTeamPromptContent => 'Let\'s make a new team!';
+  String get createTeamPromptContent1 => 'Make a new team,';
+
+  String get createTeamPromptContent2 =>
+      'or join one where your friends already are!';
 
   String get pageIcon => '\u{1F914}';
 
-  String get createTeamButtonMessage => 'create team';
+  String get createTeamButtonMessage => 'create/join team';
 }
 
 abstract class EmojiSelectorMessages {
   String get promptSelectMessage => 'Select an Emoji';
 }
-
 
 abstract class HomepageMessages {
   String get drawerHeaderMessage => 'Your Teams';
@@ -33,6 +35,8 @@ abstract class HomepageMessages {
   String get createTeamButtonMessage => 'Create Team';
 
   String get signOutButtonMessage => 'Sign Out';
+
+  String get joinTeamButtonMessage => 'Join a team';
 }
 
 abstract class EmojiList {

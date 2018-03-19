@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:Teamoji_tutorial/src/common/messages.dart';
 import 'package:Teamoji_tutorial/src/emoji_render/emoji_render.dart';
 import 'package:angular/angular.dart';
@@ -12,14 +13,24 @@ import 'package:angular_components/angular_components.dart';
     EmojiRenderComponent,
     MaterialButtonComponent,
     MaterialInputComponent,
-    NgModel,
+    MaterialIconComponent,
   ],
 )
 class CreateTeamComponent extends CreateTeamMessages {
   String newTeamName = null;
 
+  final StreamController _createTeamStream = new StreamController.broadcast();
+
+  @Output()
+  Stream get onCreate => _createTeamStream.stream;
+
   Future<Null> create() async {
-    print('You want to create a new team called: $newTeamName');
-    newTeamName = '';
+    try {
+      _createTeamStream.add(newTeamName);
+    } catch (error) {
+      print("$runtimeType::create() -- $error");
+    }
   }
+
+  void returnToHomePage() => _createTeamStream.add(null);
 }

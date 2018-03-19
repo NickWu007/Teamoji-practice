@@ -1,7 +1,17 @@
 .tm-user-profile-image {
     border-radius: 50%;
-    height: 25px;
-    weight: 25px;
+    height: 30px;
+    width: 30px;
+}
+
+.tm-user-post-user-icon {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-gap: 8px;
+}
+
+.tm-user-post-user-name {
+    padding-top: 4px;
 }
 
 .tm-user-post-timestamp {
