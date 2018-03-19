@@ -69,7 +69,8 @@ class HomepageComponent extends HomepageMessages implements OnInit {
     if (message != null) {
       await _fbService.fbDatabase
           .ref('messages/' + currentTeam)
-          .push(Message.toMap(message)).future;
+          .push(Message.toMap(message))
+          .future;
     }
   }
 
