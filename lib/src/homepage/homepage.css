@@ -59,6 +59,8 @@
 .tm-main-content-content {
     height: 100%;
     padding: 8px;
+    display: flex;
+    justify-content: center;
 }
 
 .tm-add-post-icon {

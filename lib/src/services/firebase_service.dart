@@ -10,9 +10,11 @@ class FirebaseService {
   fb.GoogleAuthProvider _fbGoogleAuthProvider;
   fb.Database fbDatabase;
   List<String> groups;
-  List<Message> previousEmojis = [];
+  Map<String,List<Message>> previousEmojiMap = {};
   List<String> teams = [];
   String currentTeam = '';
+
+  List<Message> get previousEmojis => previousEmojiMap.containsKey(currentTeam) ? previousEmojiMap[currentTeam] : [];
 
   FirebaseService() {
     secret.init();
@@ -28,8 +30,7 @@ class FirebaseService {
       Map rawTeams = e.snapshot.val();
       if (rawTeams == null) return;
       rawTeams.forEach((k, v) => teams.add(v));
-      currentTeam = teams[0];
-      switchTeam();
+      changeTeam(teams[0]);
     });
   }
 
@@ -40,16 +41,20 @@ class FirebaseService {
   }
 
   void switchTeam() {
-    previousEmojis = [];
+    // return if there is already a lister.
+    if (previousEmojiMap.containsKey(currentTeam)) return;
+
+    previousEmojiMap[currentTeam] = [];
+    // Register listener
     fbDatabase
         .ref('messages/' + currentTeam)
         .onChildAdded
-        .listen(_buildPrevEmoji);
+        .listen((e) => _buildPrevEmoji(e, currentTeam));
   }
 
-  _buildPrevEmoji(e) {
+  _buildPrevEmoji(e, team) {
     Map rawMessages = e.snapshot.val();
-    previousEmojis.insert(0, new Message.fromJson(rawMessages));
+    previousEmojiMap[team].insert(0, new Message.fromJson(rawMessages));
   }
 
   Future postNewMessage(Message message) async {
@@ -64,7 +69,7 @@ class FirebaseService {
   Future createTeam(String teamName) async {
     await fbDatabase
         .ref('users_teams/' + fbAuth.currentUser.uid)
-        .push(teamName);
+        .push(teamName).future;
   }
 
   Future signIn() async {
@@ -73,8 +78,8 @@ class FirebaseService {
       if (fbAuth.currentUser != null) {
         fbDatabase
             .ref('users_teams/' + fbAuth.currentUser.uid)
-            .onValue
-            .listen((event) async {
+            .once('value')
+            .then((event) async {
           if (event.snapshot.val() == null) {
             await fbDatabase
                 .ref('users_teams/' + fbAuth.currentUser.uid)
