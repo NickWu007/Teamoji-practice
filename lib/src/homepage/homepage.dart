@@ -45,8 +45,6 @@ class HomepageComponent extends HomepageMessages implements OnInit {
 
   bool shouldShowAsDeepBlue(String team) => team == service.currentTeam;
 
-  String get imageURL => service.user.photoURL;
-
   HomepageComponent(this.service);
 
   Future onSelectEmoji(Message message) async {

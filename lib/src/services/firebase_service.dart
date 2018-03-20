@@ -9,7 +9,6 @@ class FirebaseService {
   fb.Auth fbAuth;
   fb.GoogleAuthProvider _fbGoogleAuthProvider;
   fb.Database fbDatabase;
-  fb.User user;
   List<String> groups;
   List<Message> previousEmojis = [];
   List<String> teams = [];
@@ -23,14 +22,11 @@ class FirebaseService {
     fbDatabase = fb.database();
   }
 
-  void init() {
-    fbAuth.onAuthStateChanged.listen((user) => this.user = user);
-  }
-
   void buildTeams() {
-    fbDatabase.ref('users_teams/' + user.uid).onValue.listen((e) {
+    fbDatabase.ref('users_teams/' + fbAuth.currentUser.uid).onValue.listen((e) {
       teams = [];
       Map rawTeams = e.snapshot.val();
+      if (rawTeams == null) return;
       rawTeams.forEach((k, v) => teams.add(v));
       currentTeam = teams[0];
       switchTeam();
@@ -75,8 +71,6 @@ class FirebaseService {
     try {
       await fbAuth.signInWithPopup(_fbGoogleAuthProvider);
       if (fbAuth.currentUser != null) {
-        user = fbAuth.currentUser;
-        final defaultGroups = ['general'];
         fbDatabase
             .ref('users_teams/' + fbAuth.currentUser.uid)
             .onValue
@@ -84,7 +78,7 @@ class FirebaseService {
           if (event.snapshot.val() == null) {
             await fbDatabase
                 .ref('users_teams/' + fbAuth.currentUser.uid)
-                .set(defaultGroups);
+                .push('general').future;
           }
           ;
         });
