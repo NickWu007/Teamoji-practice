@@ -5,10 +5,10 @@
             {{drawerHeaderMessage}}
         </div>
         <material-list class="tm-home-drawer-list">
-            <material-list-item *ngFor="let team of service.teams"
+            <material-list-item *ngFor="let team of teams"
                                 class="tm-team-list-item"
                                 [class.deep-blue]="shouldShowAsDeepBlue(team)"
-                                (trigger)="drawer.toggle(); service.changeTeam(team);">
+                                (trigger)="drawer.toggle();">
                 {{team}}
             </material-list-item>
         </material-list>
@@ -28,11 +28,11 @@
             <material-button class="material-drawer-button" icon (trigger)="drawer.toggle()">
                 <material-icon icon="menu"></material-icon>
             </material-button>
-            <div class="tm-main-content-header-title">{{service.currentTeam}}</div>
+            <div class="tm-main-content-header-title">header</div>
         </div>
         <div class="tm-main-content-content">
             <ul style="padding-left: 0; display: grid; grid-template-columns: 1fr 1fr;">
-                <li *ngFor="let message of service.previousEmojis" class="tm-prev-emoji-item">
+                <li *ngFor="let message of previousEmojis" class="tm-prev-emoji-item">
                     <user-post [message]="message"></user-post>
                 </li>
             </ul>

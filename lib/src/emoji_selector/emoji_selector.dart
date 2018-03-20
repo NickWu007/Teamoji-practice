@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:Teamoji_tutorial/src/common/message.dart';
 import 'package:Teamoji_tutorial/src/common/messages.dart';
 import 'package:Teamoji_tutorial/src/emoji_render/emoji_render.dart';
-import 'package:Teamoji_tutorial/src/services/firebase_service.dart';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 
@@ -24,15 +23,10 @@ class EmojiSelectorComponent extends EmojiSelectorMessages with EmojiList {
   @Output()
   Stream get onSelect => _selectStream.stream;
 
-  FirebaseService service;
-
-  EmojiSelectorComponent(this.service);
-
   void onCancel() => _selectStream.add(null);
 
-  void onSelectEmoji(String emoji) => _selectStream.add(new Message(
-      service.fbAuth.currentUser.displayName,
-      service.fbAuth.currentUser.photoURL,
-      emoji,
-      new DateTime.now()));
+  void onSelectEmoji(String emoji) {
+    // TODO: add new message to the stream.
+    _selectStream.add(null);
+  }
 }

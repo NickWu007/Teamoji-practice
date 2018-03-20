@@ -4,7 +4,6 @@ import 'package:Teamoji_tutorial/src/common/message.dart';
 import 'package:Teamoji_tutorial/src/common/messages.dart';
 import 'package:Teamoji_tutorial/src/create_team/create_team.dart';
 import 'package:Teamoji_tutorial/src/emoji_selector/emoji_selector.dart';
-import 'package:Teamoji_tutorial/src/services/firebase_service.dart';
 import 'package:Teamoji_tutorial/src/user_post/user_post.dart';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
@@ -34,41 +33,49 @@ import 'package:angular_components/angular_components.dart';
       'homepage.css',
     ])
 class HomepageComponent extends HomepageMessages implements OnInit {
-  FirebaseService service;
   bool visible = false;
   String currentComponent = 'homepage';
+
+  List<Message> previousEmojis = [
+    new Message('Nick', 'images/profile_placeholder.png', '\u{1F60B}',
+        new DateTime.now()),
+    new Message('Nick', 'images/profile_placeholder.png', '\u{1F60B}',
+        new DateTime.now()),
+    new Message('Nick', 'images/profile_placeholder.png', '\u{1F60B}',
+        new DateTime.now()),
+    new Message('Nick', 'images/profile_placeholder.png', '\u{1F60B}',
+        new DateTime.now()),
+    new Message('Nick', 'images/profile_placeholder.png', '\u{1F60B}',
+        new DateTime.now()),
+  ];
+
+  List<String> teams = ['google', 'angular', 'firebase'];
 
   final StreamController<String> stream = new StreamController.broadcast();
 
   @Output()
   Stream get onPageChange => stream.stream;
 
-  bool shouldShowAsDeepBlue(String team) => team == service.currentTeam;
-
-  String get imageURL => service.user.photoURL;
-
-  HomepageComponent(this.service);
+  bool shouldShowAsDeepBlue(String team) => false;
 
   Future onSelectEmoji(Message message) async {
     currentComponent = 'homepage';
-    await service.postNewMessage(message);
+    // TODO: use firebase database to push new message.
   }
 
   Future onCreateTeam(String teamName) async {
-    print('create event sent to homepage');
     currentComponent = 'homepage';
     if (teamName == null) return;
-    print("create team emoji wants to create $teamName");
-    await service.createTeam(teamName);
+    // TODO: use firebase database to create new page.
   }
 
   Future onSignOut() async {
-    await service.signOut();
+    // TODO: use firebase authentication to log out.
     stream.add('welcome');
   }
 
   @override
   ngOnInit() {
-    service.buildTeams();
+    // TODO: use firebase database to build the teams.
   }
 }
