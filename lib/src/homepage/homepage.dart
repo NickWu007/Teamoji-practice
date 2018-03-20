@@ -55,10 +55,8 @@ class HomepageComponent extends HomepageMessages implements OnInit {
   }
 
   Future onCreateTeam(String teamName) async {
-    print('create event sent to homepage');
     currentComponent = 'homepage';
     if (teamName == null) return;
-    print("create team emoji wants to create $teamName");
     await service.createTeam(teamName);
   }
 

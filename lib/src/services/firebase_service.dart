@@ -29,7 +29,6 @@ class FirebaseService {
 
   void buildTeams() {
     fbDatabase.ref('users_teams/' + user.uid).onValue.listen((e) {
-      print('init database snapshot : ${e.snapshot.val()}');
       teams = [];
       Map rawTeams = e.snapshot.val();
       rawTeams.forEach((k, v) => teams.add(v));
@@ -39,7 +38,6 @@ class FirebaseService {
   }
 
   void changeTeam(String team) {
-    print('You want to change to team: $team');
     if (currentTeam == team) return;
     currentTeam = team;
     switchTeam();
@@ -47,7 +45,6 @@ class FirebaseService {
 
   void switchTeam() {
     previousEmojis = [];
-    print('curent team: ${currentTeam}');
     fbDatabase
         .ref('messages/' + currentTeam)
         .onChildAdded
@@ -85,7 +82,6 @@ class FirebaseService {
             .onValue
             .listen((event) async {
           if (event.snapshot.val() == null) {
-            print('Init general group');
             await fbDatabase
                 .ref('users_teams/' + fbAuth.currentUser.uid)
                 .set(defaultGroups);
