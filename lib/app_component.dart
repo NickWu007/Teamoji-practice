@@ -29,11 +29,18 @@ import 'package:angular_components/angular_components.dart';
 class AppComponent implements OnInit {
   String currentPage = 'welcome';
 
+  FirebaseService service;
+
+  AppComponent(this.service);
 
   void onPageChange(String nextPage) => currentPage = nextPage;
 
   @override
   ngOnInit() {
-    // TODO: use firebase to check if the user is already logged in.
+    service.fbAuth.onAuthStateChanged.listen((user) {
+      if (user != null) {
+        currentPage = 'homepage';
+      }
+    });
    }
 }
