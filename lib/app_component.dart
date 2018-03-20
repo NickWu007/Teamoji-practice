@@ -2,6 +2,7 @@
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
 import 'package:Teamoji_tutorial/src/homepage/homepage.dart';
+import 'package:Teamoji_tutorial/src/services/firebase_service.dart';
 import 'package:Teamoji_tutorial/src/welcome/welcome_page.dart';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
@@ -22,15 +23,17 @@ import 'package:angular_components/angular_components.dart';
   ],
   providers: const [
     materialProviders,
+    FirebaseService,
   ],
 )
 class AppComponent implements OnInit {
-  String currentPage = 'homepage';
+  String currentPage = 'welcome';
+
 
   void onPageChange(String nextPage) => currentPage = nextPage;
 
   @override
   ngOnInit() {
     // TODO: use firebase to check if the user is already logged in.
-  }
+   }
 }

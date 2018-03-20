@@ -8,7 +8,6 @@ import 'package:Teamoji_tutorial/app_component.dart';
 
 void main() {
   FirebaseService service = new FirebaseService();
-  service.init();
   bootstrap(AppComponent, [
     service
   ]);

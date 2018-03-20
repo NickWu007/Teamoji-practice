@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:Teamoji_tutorial/src/common/messages.dart';
 import 'package:Teamoji_tutorial/src/emoji_render/emoji_render.dart';
 import 'package:Teamoji_tutorial/src/homepage/homepage.dart';
+import 'package:Teamoji_tutorial/src/services/firebase_service.dart';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 
@@ -18,12 +19,16 @@ import 'package:angular_components/angular_components.dart';
   ],
 )
 class WelcomePageComponent extends WelcomePageMessages {
-  StreamController<String> get stream => new StreamController.broadcast();
+  final StreamController<String> stream = new StreamController.broadcast();
+  final FirebaseService service;
+
+  WelcomePageComponent(this.service);
 
   @Output()
   Stream get onPageChange => stream.stream;
 
   Future<Null> login() async {
-    // TODO: use firebase authentication to log in.
+    await service.signIn();
+    if (service.fbAuth.currentUser != null) stream.add('homepage');
   }
 }

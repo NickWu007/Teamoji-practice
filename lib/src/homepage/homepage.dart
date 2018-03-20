@@ -4,6 +4,7 @@ import 'package:Teamoji_tutorial/src/common/message.dart';
 import 'package:Teamoji_tutorial/src/common/messages.dart';
 import 'package:Teamoji_tutorial/src/create_team/create_team.dart';
 import 'package:Teamoji_tutorial/src/emoji_selector/emoji_selector.dart';
+import 'package:Teamoji_tutorial/src/services/firebase_service.dart';
 import 'package:Teamoji_tutorial/src/user_post/user_post.dart';
 import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
@@ -52,6 +53,9 @@ class HomepageComponent extends HomepageMessages implements OnInit {
   List<String> teams = ['google', 'angular', 'firebase'];
 
   final StreamController<String> stream = new StreamController.broadcast();
+  final FirebaseService service;
+
+  HomepageComponent(this.service);
 
   @Output()
   Stream get onPageChange => stream.stream;
@@ -70,7 +74,7 @@ class HomepageComponent extends HomepageMessages implements OnInit {
   }
 
   Future onSignOut() async {
-    // TODO: use firebase authentication to log out.
+    await service.signOut();
     stream.add('welcome');
   }
 
